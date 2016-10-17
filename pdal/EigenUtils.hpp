@@ -1,36 +1,36 @@
 /******************************************************************************
-* Copyright (c) 2016, Bradley J Chambers (brad.chambers@gmail.com)
-*
-* All rights reserved.
-*
-* Redistribution and use in source and binary forms, with or without
-* modification, are permitted provided that the following
-* conditions are met:
-*
-*     * Redistributions of source code must retain the above copyright
-*       notice, this list of conditions and the following disclaimer.
-*     * Redistributions in binary form must reproduce the above copyright
-*       notice, this list of conditions and the following disclaimer in
-*       the documentation and/or other materials provided
-*       with the distribution.
-*     * Neither the name of Hobu, Inc. or Flaxen Geo Consulting nor the
-*       names of its contributors may be used to endorse or promote
-*       products derived from this software without specific prior
-*       written permission.
-*
-* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-* "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-* LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
-* FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
-* COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-* INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-* BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
-* OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
-* AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
-* OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
-* OF SUCH DAMAGE.
-****************************************************************************/
+ * Copyright (c) 2016, Bradley J Chambers (brad.chambers@gmail.com)
+ *
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following
+ * conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in
+ *       the documentation and/or other materials provided
+ *       with the distribution.
+ *     * Neither the name of Hobu, Inc. or Flaxen Geo Consulting nor the
+ *       names of its contributors may be used to endorse or promote
+ *       products derived from this software without specific prior
+ *       written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+ * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+ * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
+ * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
+ * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+ * OF SUCH DAMAGE.
+ ****************************************************************************/
 
 #pragma once
 
@@ -75,7 +75,7 @@ namespace eigen
   \return the 3D centroid of the XYZ dimensions.
 */
 PDAL_DLL Eigen::Vector3f computeCentroid(PointView& view,
-        std::vector<PointId> ids);
+                                         std::vector<PointId> ids);
 
 /**
   Compute the covariance matrix of a collection of points.
@@ -100,7 +100,7 @@ PDAL_DLL Eigen::Vector3f computeCentroid(PointView& view,
   \return the covariance matrix of the XYZ dimensions.
 */
 PDAL_DLL Eigen::Matrix3f computeCovariance(PointView& view,
-        std::vector<PointId> ids);
+                                           std::vector<PointId> ids);
 
 /**
   Compute second derivative in X direction using central difference method.
@@ -248,10 +248,10 @@ PDAL_DLL uint8_t computeRank(PointView& view, std::vector<PointId> ids,
   \return the matrix of maximum Z values.
 */
 PDAL_DLL Eigen::MatrixXd createMaxMatrix(PointView& view, int rows, int cols,
-        double cell_size, BOX2D bounds);
+                                         double cell_size, BOX2D bounds);
 
 PDAL_DLL Eigen::MatrixXd createMaxMatrix2(PointView& view, int rows, int cols,
-        double cell_size, BOX2D bounds);
+                                          double cell_size, BOX2D bounds);
 
 /**
   Create matrix of minimum Z values.
@@ -267,8 +267,8 @@ PDAL_DLL Eigen::MatrixXd createMaxMatrix2(PointView& view, int rows, int cols,
   \return the matrix of minimum Z values.
 */
 PDAL_DLL Eigen::MatrixXd createMinMatrix(PointView& view, int rows, int cols,
-        double cell_size, BOX2D bounds);
-        
+                                         double cell_size, BOX2D bounds);
+
 /**
   Find local minimum elevations by extended local minimum.
 
@@ -288,7 +288,8 @@ PDAL_DLL Eigen::MatrixXd createMinMatrix(PointView& view, int rows, int cols,
   \return the matrix of minimum Z values (ignoring low outliers).
 */
 PDAL_DLL Eigen::MatrixXd extendedLocalMinimum(PointView& view, int rows,
-        int cols, double cell_size, BOX2D bounds);
+                                              int cols, double cell_size,
+                                              BOX2D bounds);
 
 /**
   Perform a morphological closing of the input matrix.
@@ -327,7 +328,7 @@ PDAL_DLL Eigen::MatrixXd matrixOpen(Eigen::MatrixXd data, int radius);
   \param data the input raster.
   \param rows the number of rows.
   \param cols the number of cols.
-  \param iterations the number of iterations used to approximate a larger 
+  \param iterations the number of iterations used to approximate a larger
          structuring element.
   \return the morphological dilation of the input raster.
 */
@@ -346,13 +347,12 @@ PDAL_DLL std::vector<double> dilateDiamond(std::vector<double> data,
   \param data the input raster.
   \param rows the number of rows.
   \param cols the number of cols.
-  \param iterations the number of iterations used to approximate a larger 
+  \param iterations the number of iterations used to approximate a larger
          structuring element.
   \return the morphological erosion of the input raster.
 */
-PDAL_DLL std::vector<double> erodeDiamond(std::vector<double> data,
-                                          size_t rows, size_t cols,
-                                          int iterations);
+PDAL_DLL std::vector<double> erodeDiamond(std::vector<double> data, size_t rows,
+                                          size_t cols, int iterations);
 
 /**
   Pad input matrix symmetrically.
@@ -368,16 +368,16 @@ PDAL_DLL Derived padMatrix(const Eigen::MatrixBase<Derived>& d, int r)
 {
     using namespace Eigen;
 
-    Derived out = Derived::Zero(d.rows()+2*r, d.cols()+2*r);
+    Derived out = Derived::Zero(d.rows() + 2 * r, d.cols() + 2 * r);
     out.block(r, r, d.rows(), d.cols()) = d;
     out.block(r, 0, d.rows(), r) =
         d.block(0, 0, d.rows(), r).rowwise().reverse();
-    out.block(r, d.cols()+r, d.rows(), r) =
-        d.block(0, d.cols()-r, d.rows(), r).rowwise().reverse();
+    out.block(r, d.cols() + r, d.rows(), r) =
+        d.block(0, d.cols() - r, d.rows(), r).rowwise().reverse();
     out.block(0, 0, r, out.cols()) =
         out.block(r, 0, r, out.cols()).colwise().reverse();
-    out.block(d.rows()+r, 0, r, out.cols()) =
-        out.block(out.rows()-r-1, 0, r, out.cols()).colwise().reverse();
+    out.block(d.rows() + r, 0, r, out.cols()) =
+        out.block(out.rows() - r - 1, 0, r, out.cols()).colwise().reverse();
 
     return out;
 }
@@ -450,12 +450,12 @@ PDAL_DLL Derived gradX(const Eigen::MatrixBase<Derived>& A)
     Derived out = Derived::Zero(A.rows(), A.cols());
 
     // Interior points are obtained by central differences.
-    out.block(0, 1, A.rows(), A.cols()-2) =
-        0.5 * (A.rightCols(A.cols()-2) - A.leftCols(A.cols()-2));
+    out.block(0, 1, A.rows(), A.cols() - 2) =
+        0.5 * (A.rightCols(A.cols() - 2) - A.leftCols(A.cols() - 2));
 
     // Edge columns are obtained by single-sided differences.
     out.col(0) = A.col(1) - A.col(0);
-    out.col(out.cols()-1) = A.col(A.cols()-1) - A.col(A.cols()-2);
+    out.col(out.cols() - 1) = A.col(A.cols() - 1) - A.col(A.cols() - 2);
 
     return out;
 };
@@ -475,12 +475,12 @@ PDAL_DLL Derived gradY(const Eigen::MatrixBase<Derived>& A)
     Derived out = Derived::Zero(A.rows(), A.cols());
 
     // Interior points are obtained by central differences.
-    out.block(1, 0, A.rows()-2, A.cols()) =
-        0.5 * (A.bottomRows(A.rows()-2) - A.topRows(A.rows()-2));
+    out.block(1, 0, A.rows() - 2, A.cols()) =
+        0.5 * (A.bottomRows(A.rows() - 2) - A.topRows(A.rows() - 2));
 
     // Edge rows are obtained by single-sided differences.
     out.row(0) = A.row(1) - A.row(0);
-    out.row(out.rows()-1) = A.row(A.rows()-1) - A.row(A.rows()-2);
+    out.row(out.rows() - 1) = A.row(A.rows() - 1) - A.row(A.rows() - 2);
 
     return out;
 };
@@ -508,7 +508,8 @@ PDAL_DLL double computeContour(const Eigen::MatrixBase<Derived>& data,
     double zY = centralDiffY(filled, spacing);
     double p = (zX * zX) + (zY * zY);
     double q = p + 1;
-    return ((zXX*zX*zX)-(2*zXY*zX*zY)+(zYY*zY*zY))/(p*std::sqrt(q*q*q));
+    return ((zXX * zX * zX) - (2 * zXY * zX * zY) + (zYY * zY * zY)) /
+           (p * std::sqrt(q * q * q));
 }
 
 /**
@@ -556,7 +557,8 @@ PDAL_DLL double computeProfile(const Eigen::MatrixBase<Derived>& data,
     double zY = centralDiffY(filled, spacing);
     double p = (zX * zX) + (zY * zY);
     double q = p + 1;
-    return ((zXX*zX*zX)+(2*zXY*zX*zY)+(zYY*zY*zY))/(p*std::sqrt(q*q*q));
+    return ((zXX * zX * zX) + (2 * zXY * zX * zY) + (zYY * zY * zY)) /
+           (p * std::sqrt(q * q * q));
 }
 
 /**
@@ -582,7 +584,8 @@ PDAL_DLL double computeTangential(const Eigen::MatrixBase<Derived>& data,
     double zY = centralDiffY(filled, spacing);
     double p = (zX * zX) + (zY * zY);
     double q = p + 1;
-    return ((zXX*zY*zY)-(2*zXY*zX*zY)+(zYY*zX*zX))/(p*std::sqrt(q));
+    return ((zXX * zY * zY) - (2 * zXY * zX * zY) + (zYY * zX * zX)) /
+           (p * std::sqrt(q));
 }
 
 /**
@@ -601,7 +604,8 @@ PDAL_DLL double computeDZDX(const Eigen::MatrixBase<Derived>& data,
     if (spacing <= 0.0)
         throw pdal_error("Must provide positive spacing to computeDZDX");
     return ((data(0, 2) + 2.0 * data(1, 2) + data(2, 2)) -
-            (data(0, 0) + 2.0 * data(1, 0) + data(2, 0))) / (8.0 * spacing);
+            (data(0, 0) + 2.0 * data(1, 0) + data(2, 0))) /
+           (8.0 * spacing);
 }
 
 /**
@@ -620,11 +624,11 @@ PDAL_DLL double computeDZDY(const Eigen::MatrixBase<Derived>& data,
     if (spacing <= 0.0)
         throw pdal_error("Must provide positive spacing to computeDZDY");
     return ((data(2, 0) + 2.0 * data(2, 1) + data(2, 2)) -
-            (data(0, 0) + 2.0 * data(0, 1) + data(0, 2)))  / (8.0 * spacing);
+            (data(0, 0) + 2.0 * data(0, 1) + data(0, 2))) /
+           (8.0 * spacing);
 }
 
-inline
-PDAL_DLL double computeSlopeRad(double dZdX, double dZdY)
+inline PDAL_DLL double computeSlopeRad(double dZdX, double dZdY)
 {
     return std::atan(std::sqrt(std::pow(dZdX, 2) + std::pow(dZdY, 2)));
 }
@@ -648,8 +652,8 @@ PDAL_DLL double computeHillshade(const Eigen::MatrixBase<Derived>& data,
     if (spacing <= 0.0)
         throw pdal_error("Must provide positive spacing to computeHillshade");
 
-    double zenithRad = (90.0 - illumAltitudeDegree) *
-                       (3.14159265358979323846 / 180.0);
+    double zenithRad =
+        (90.0 - illumAltitudeDegree) * (3.14159265358979323846 / 180.0);
     double azimuthMath = 360.0 - illumAzimuthDegree + 90.0;
     if (azimuthMath >= 360.0)
     {
@@ -670,8 +674,8 @@ PDAL_DLL double computeHillshade(const Eigen::MatrixBase<Derived>& data,
         }
         else if (dZdY < 0.0)
         {
-            aspectRad = (2 * 3.14159265358979323846) -
-                        (3.14159265358979323846 / 2.0);
+            aspectRad =
+                (2 * 3.14159265358979323846) - (3.14159265358979323846 / 2.0);
         }
     }
     else
@@ -684,7 +688,8 @@ PDAL_DLL double computeHillshade(const Eigen::MatrixBase<Derived>& data,
     }
 
     return std::cos(zenithRad) * std::cos(slopeRad) +
-           std::sin(zenithRad) * std::sin(slopeRad) * std::cos(azimuthRad - aspectRad);
+           std::sin(zenithRad) * std::sin(slopeRad) *
+               std::cos(azimuthRad - aspectRad);
 }
 
 /**
@@ -706,7 +711,7 @@ PDAL_DLL double computeAspectFD(const Eigen::MatrixBase<Derived>& data,
     double zX = centralDiffX(filled, spacing);
     double zY = centralDiffY(filled, spacing);
     double p = (zX * zX) + (zY * zY);
-    return 180.0 - std::atan(zY/zX) + 90.0 * (zX / std::fabs(zX));
+    return 180.0 - std::atan(zY / zX) + 90.0 * (zX / std::fabs(zX));
 }
 
 /**
@@ -746,14 +751,22 @@ PDAL_DLL double computeAspectD8(const Eigen::MatrixBase<Derived>& data,
         if (submatrix(i) > maxval)
         {
             maxval = submatrix(i);
-            if (i == 1) j = 6;
-            if (i == 2) j = 5;
-            if (i == 3) j = 4;
-            if (i == 4) j = 7;
-            if (i == 6) j = 3;
-            if (i == 7) j = 0;
-            if (i == 8) j = 1;
-            if (i == 9) j = 2;
+            if (i == 1)
+                j = 6;
+            if (i == 2)
+                j = 5;
+            if (i == 3)
+                j = 4;
+            if (i == 4)
+                j = 7;
+            if (i == 6)
+                j = 3;
+            if (i == 7)
+                j = 0;
+            if (i == 8)
+                j = 1;
+            if (i == 9)
+                j = 2;
         }
     }
 
@@ -846,17 +859,17 @@ PDAL_DLL Derived dilate(const Eigen::MatrixBase<Derived>& A, int radius)
             {
                 if (match_flag)
                     break;
-                int cdiff = k-radius;
-                int cpos = c+cdiff;
+                int cdiff = k - radius;
+                int cpos = c + cdiff;
                 if (cpos < 0 || cpos >= A.cols())
                     continue;
                 for (int l = 0; l < length; ++l)
                 {
-                    int rdiff = l-radius;
-                    int rpos = r+rdiff;
+                    int rdiff = l - radius;
+                    int rpos = r + rdiff;
                     if (rpos < 0 || rpos >= A.rows())
                         continue;
-                    if ((cdiff*cdiff+rdiff*rdiff) > radius*radius)
+                    if ((cdiff * cdiff + rdiff * rdiff) > radius * radius)
                         continue;
                     if (A(rpos, cpos) == 1)
                     {
@@ -904,17 +917,17 @@ PDAL_DLL Derived erode(const Eigen::MatrixBase<Derived>& A, int radius)
             {
                 if (mismatch_flag)
                     break;
-                int cdiff = k-radius;
-                int cpos = c+cdiff;
+                int cdiff = k - radius;
+                int cpos = c + cdiff;
                 if (cpos < 0 || cpos >= A.cols())
                     continue;
                 for (int l = 0; l < length; l++)
                 {
-                    int rdiff = l-radius;
-                    int rpos = r+rdiff;
+                    int rdiff = l - radius;
+                    int rpos = r + rdiff;
                     if (rpos < 0 || rpos >= A.rows())
                         continue;
-                    if ((cdiff*cdiff+rdiff*rdiff) > radius*radius)
+                    if ((cdiff * cdiff + rdiff * rdiff) > radius * radius)
                         continue;
                     if (A(rpos, cpos) == 0)
                     {
@@ -942,10 +955,31 @@ PDAL_DLL Derived erode(const Eigen::MatrixBase<Derived>& A, int radius)
   \param yy the y coordinate of the points to be interpolated.
   \return the values of the interpolated data at xx and yy.
 */
-PDAL_DLL Eigen::MatrixXd computeSpline(Eigen::MatrixXd x, Eigen::MatrixXd y,
-                                       Eigen::MatrixXd z, Eigen::MatrixXd xx,
-                                       Eigen::MatrixXd yy);
+PDAL_DLL std::vector<double> computeSpline(std::vector<double> x,
+                                           std::vector<double> y,
+                                           std::vector<double> z, size_t prows,
+                                           size_t pcols, std::vector<double> xx,
+                                           std::vector<double> yy, size_t rows,
+                                           size_t cols);
 
+/**
+  Thin Plate Spline interpolation with simple sampling.
+
+  Donato, Gianluca, and Serge Belongie. “Approximate Thin Plate Spline
+  Mappings.” Computer Vision (2002): 21–31.
+
+  \param x the x coordinate of the input data.
+  \param y the y coordinate of the input data.
+  \param z the z coordinate of the input data.
+  \param xx the x coordinate of the points to be interpolated.
+  \param yy the y coordinate of the points to be interpolated.
+  \return the values of the interpolated data at xx and yy.
+*/
+PDAL_DLL std::vector<double>
+computeSampledSpline(std::vector<double> x, std::vector<double> y,
+                     std::vector<double> z, size_t prows, size_t pcols,
+                     std::vector<double> xx, std::vector<double> yy,
+                     size_t rows, size_t cols);
 
 } // namespace eigen
 
