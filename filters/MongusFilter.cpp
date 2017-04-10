@@ -44,6 +44,8 @@
 
 #include "private/DimRange.hpp"
 
+#include <iterator>
+
 namespace pdal
 {
 
