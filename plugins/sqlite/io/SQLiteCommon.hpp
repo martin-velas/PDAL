@@ -467,8 +467,8 @@ public:
 #endif
 
 #ifdef _WIN32
-        so_extension = "dll";
-        lib_extension = "mod_";
+        so_extension = ".dll";
+        lib_extension = "";
 #endif
 
 // #if !defined(sqlite3_enable_load_extension)
@@ -486,7 +486,7 @@ public:
         if (module_name.size())
             oss << module_name;
         else
-            oss << lib_extension << "spatialite";
+            oss << lib_extension << "spatialite" << so_extension;;
         oss << "')";
         execute(oss.str());
         oss.str("");

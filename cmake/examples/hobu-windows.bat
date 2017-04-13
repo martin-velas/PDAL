@@ -7,8 +7,8 @@
 
 :: Pick your CMake GENERATOR.  (NMake will pick up architecture (x32, x64) from your environment)
 set GENERATOR="NMake Makefiles"
-rem set GENERATOR="Visual Studio 10 Win64"
-rem set GENERATOR="Visual Studio 10"
+set GENERATOR="Ninja"
+set GENERATOR="Visual Studio 14 Win64"
 
 :: Pick your build type
 set BUILD_TYPE=Release
@@ -58,12 +58,17 @@ set PYTHON_INCLUDE_DIR=%OSGEO4W_DIR\apps\python27\include
 set PYTHON_LIBRARY=%OSGEO4W_DIR\apps\python27\libs\python27.lib
 
 
+:: CURL
+set LIBXML2_ENABLED=ON
+set CURL_INCLUDE_DIR=%OSGEO4W_DIR%\include
+set CURL_LIBRARY=%OSGEO4W_DIR%\lib\libcurl.lib
+
 
 if EXIST CMakeCache.txt del CMakeCache.txt
 
-cmake -G "Visual Studio 14 2015 Win64" ^
+cmake -G %GENERATOR% ^
     -DBUILD_PLUGIN_CPD=OFF ^
-    -DBUILD_PLUGIN_GREYHOUND=OFF ^
+    -DBUILD_PLUGIN_GREYHOUND=ON ^
     -DBUILD_PLUGIN_HEXBIN=ON ^
     -DBUILD_PLUGIN_ICEBRIDGE=OFF ^
     -DBUILD_PLUGIN_MRSID=OFF ^
@@ -82,6 +87,8 @@ cmake -G "Visual Studio 14 2015 Win64" ^
 	-DPYTHON_EXECUTABLE=%OSGEO4W_DIR%\bin\python.exe ^
 	-DPYTHON_INCLUDE_DIR=%OSGEO4W_DIR%\apps\python27\include ^
 	-DPYTHON_LIBRARY=%OSGEO4W_DIR%\apps\python27\libs\python27.lib ^
+	-DCURL_INCLUDE_DIR=%CURL_INCLUDE_DIR% ^
+	-DCURL_LIBRARY=%CURL_LIBRARY% ^
 	-DNUMPY_INCLUDE_DIR=%OSGEO4W_DIR%\apps\python27\lib\site-packages\numpy\core\include ^
 	-DNUMPY_VERSION=1.11.1 ^
     -Dgtest_force_shared_crt=ON ^
