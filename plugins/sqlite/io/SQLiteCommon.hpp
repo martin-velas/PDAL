@@ -203,13 +203,17 @@ public:
         checkSession();
 
         m_log->get(LogLevel::Debug3) << "Executing '" << sql <<"'"<< std::endl;
-
-        int status = sqlite3_exec(m_session, sql.c_str(), NULL, NULL, NULL);
+		char* errmsg;
+        int status = sqlite3_exec(m_session, sql.c_str(), NULL, NULL, &errmsg);
         if (status != SQLITE_OK)
         {
             std::ostringstream oss;
-            oss << "Database operation failed: "
-                << sql;
+			std::string msg = std::string(errmsg);
+			Utils::trimTrailing(msg);
+			oss << "Database operation failed: "
+				<< "'" << sql << "'"
+				<< " with error '" << msg << "'";
+			sqlite3_free(errmsg);
             error(oss.str(), "execute");
         }
     }
@@ -468,7 +472,7 @@ public:
 
 #ifdef _WIN32
         so_extension = ".dll";
-        lib_extension = "";
+        lib_extension = "pdal";
 #endif
 
 // #if !defined(sqlite3_enable_load_extension)
@@ -480,15 +484,22 @@ public:
             error("spatialite library load failed", "loadSpatialite");
         }
 
-        std::ostringstream oss;
+		std::ostringstream oss;
+
+
 
         oss << "SELECT load_extension('";
         if (module_name.size())
             oss << module_name;
         else
             oss << lib_extension << "spatialite" << so_extension;;
-        oss << "')";
-        execute(oss.str());
+#ifdef _WIN32
+		oss << "', 'sqlite3_modspatialite_init";
+#endif
+		oss << "')";
+
+		std::string sql(oss.str());
+        execute(sql);
         oss.str("");
 
         m_log->get(LogLevel::Debug3) <<  "SpatiaLite version: " << getSpatialiteVersion() << std::endl;
