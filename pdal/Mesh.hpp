@@ -1,5 +1,5 @@
 /******************************************************************************
-* Copyright (c) 2011, Michael P. Gerlek (mpg@flaxen.com)
+* Copyright (c) 2017, Hobu Inc.
 *
 * All rights reserved.
 *
@@ -34,36 +34,47 @@
 
 #pragma once
 
-#include <pdal/Stage.hpp>
+#include <deque>
 
 namespace pdal
 {
 
-class Filter;
-
-class FilterWrapper;
-
-class PDAL_DLL Filter : public Stage
+class Triangle
 {
-    friend class FilterWrapper;
 public:
-    Filter()
-        {}
-
-private:
-    virtual PointViewSet run(PointViewPtr view)
-    {
-        PointViewSet viewSet;
-        filter(*view);
-        viewSet.insert(view);
-        return viewSet;
-    }
-    virtual void filter(PointView& /*view*/)
+    Triangle(PointId a, PointId b, PointId c) : m_a(a), m_b(b), m_c(c)
     {}
 
-    Filter& operator=(const Filter&); // not implemented
-    Filter(const Filter&); // not implemented
+    PointId m_a;
+    PointId m_b;
+    PointId m_c;
 };
 
-}  // namespace pdal
+/**
+  A mesh is a way to represent a set of points connected by edges.  Point
+  indices are into a point view.
+*/
+class PDAL_DLL Mesh
+{};
 
+
+/**
+  A mesh where the faces are triangles.
+*/
+class PDAL_DLL TriangularMesh : public Mesh
+{
+public:
+    TriangularMesh()
+    {}
+
+    size_t size() const
+        { return m_index.size(); }
+    void add(PointId a, PointId b, PointId c)
+        { m_index.emplace_back(a, b, c); }
+    const Triangle& operator[](PointId id) const
+        { return m_index[id]; }
+protected:
+    std::deque<Triangle> m_index;
+};
+
+} // namespace pdal
