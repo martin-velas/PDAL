@@ -43,6 +43,10 @@ void Reader::readerAddArgs(ProgramArgs& args)
     m_filenameArg = &args.add("filename", "Name of file to read", m_filename);
     m_countArg = &args.add("count", "Maximum number of points read", m_count,
         std::numeric_limits<point_count_t>::max());
+
+    offset_xArg = &args.add("offset_x", "Offset X", offset_x);
+    offset_yArg = &args.add("offset_y", "Offset Y", offset_y);
+    offset_zArg = &args.add("offset_z", "Offset Z", offset_z);
 }
 
 } // namespace pdal

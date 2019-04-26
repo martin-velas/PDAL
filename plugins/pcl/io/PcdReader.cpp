@@ -80,7 +80,8 @@ point_count_t PcdReader::read(PointViewPtr view, point_count_t /*count*/)
     pcl::PCDReader r;
     r.read<XYZIRGBA>(m_filename, *cloud);
 
-    pclsupport::PCDtoPDAL(*cloud, view);
+    BOX3D borders(offset_x, offset_y, offset_z, 0, 0, 0);
+    pclsupport::PCDtoPDAL(*cloud, view, borders);
 
     return cloud->points.size();
 }
