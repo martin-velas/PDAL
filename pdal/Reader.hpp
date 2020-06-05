@@ -62,7 +62,7 @@ protected:
     Arg *m_filenameArg;
     Arg *m_countArg;
 
-    float offset_x, offset_y, offset_z;
+    double offset_x, offset_y, offset_z;
     Arg *offset_xArg, *offset_yArg, *offset_zArg;
 
 private:
