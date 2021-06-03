@@ -8,6 +8,7 @@ struct XYZIRGBA
     PCL_ADD_POINT4D;
     float intensity;
     uint32_t rgba;
+    double time;
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 } EIGEN_ALIGN16;
 
@@ -18,5 +19,6 @@ POINT_CLOUD_REGISTER_POINT_STRUCT(XYZIRGBA,
                                   (float, z, z)
                                   (float, intensity, intensity)
                                   (uint32_t, rgba, rgba)
+                                  (double, time, time)
                                  )
 

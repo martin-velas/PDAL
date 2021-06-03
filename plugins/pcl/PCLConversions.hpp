@@ -98,6 +98,18 @@ void PCDtoPDAL(CloudT &cloud, PointViewPtr view, BOX3D const& bounds)
         }
     }
 
+    for (size_t i = 0; i < cloud.points.size(); ++i)
+    {
+      double t(0.0);
+      bool hasTime(true);
+
+      typename CloudT::PointType p = cloud.points[i];
+      pcl::for_each_type<FieldList>
+              (pcl::CopyIfFieldExists<typename CloudT::PointType, double>
+                       (p, "time", hasTime, t));
+      view->setField(Dimension::Id::GpsTime, i, t);
+    }
+
     if (pcl::traits::has_color<typename CloudT::PointType>::value)
     {
         for (size_t i = 0; i < cloud.points.size(); ++i)

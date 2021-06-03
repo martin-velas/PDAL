@@ -70,6 +70,7 @@ void PcdReader::addDimensions(PointLayoutPtr layout)
 {
     layout->registerDims(getDefaultDimensions());
     layout->registerDim(Dimension::Id::Intensity, Dimension::Type::Float);
+    layout->registerDim(Dimension::Id::GpsTime, Dimension::Type::Double);
 }
 
 
